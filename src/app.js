@@ -5,32 +5,32 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 
 /////// -------------------------DB Config -------------------------------///////
-
-mongoose.connect(process.env.MONGO_DB_URL, {
-   
+mongoose.connect(process.env.MONGO_DB_URL,
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  
-})
-mongoose.connection.on('connected', () => {
-  console.log('Connected to the DB')
-})
-mongoose.connection.on('error', (error) => {
-  console.log(`Failed to connect DB: ${error}`)
-})
+  })
+  .then(() => console.log('Connexion à MongoDB réusVsie !'))
+  .catch((err) => console.error(`Connexion à MongoDB échouée ! : ${err}`));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+});
 
 /////// ------------------------- Middelwers -------------------------------///////
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
-  extended:true
+  extended: true
 }))
 /////// -------------------------Routs-------------------------------///////
 
-app.post('/hello', (req,res) => {
-  const name = req.body.name
+app.post('/hello', (req, res) => {
+  const name = req.body.name  
   res.send({
-    message : `Welcom ${name}`
+    message: `Welcom ${name}`
   })
 })
 /////// -------------------------DB Config -------------------------------///////
@@ -38,4 +38,4 @@ app.post('/hello', (req,res) => {
 
 
 
-module.exports = app
+module.exports = app;
