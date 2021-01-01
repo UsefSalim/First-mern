@@ -12,6 +12,8 @@ dependencies
 --npm i -D nodemon  ->  watching serve 
 --npm i bcryptjs -> criptage de mots de passe 
 --npm i jsonwebtoken -> create a token login 
+--npm i passport passport-jwt -> utiliser le token pour valider l'acces au url souhaiter
+
 
 
 
