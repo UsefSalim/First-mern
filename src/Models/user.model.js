@@ -11,15 +11,6 @@ const UserSchema = Schema({
   joined: { type: Date, default: Date.now  },
 });
 
-// UserSchema.methods = {
-//   authenticate: function (password) {
-//     return passwordHash.verify(password, this.password);
-//   },
-//   getToken: function () {
-//     return jwt.encode(this, config.secret);
-//   }
-// };
-//arrow function ne fonctionne pas 
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next()
