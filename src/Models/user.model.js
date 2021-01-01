@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose
-// const passwordHash = require("password-hash");
-// const jwt = require("jwt-simple");
 const bcrypt = require('bcryptjs')
 
 const UserSchema = Schema({
@@ -24,5 +22,12 @@ UserSchema.pre('save', async function (next) {
     return next(e)
   }
 })
+
+UserSchema.methods.isPasswordMatch = function (password,hash,callback) {
+  bcrypt.compare(password, hash, (error, success) => {
+    if (error) return callback(error)
+    callback(null,success)
+  })
+}
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

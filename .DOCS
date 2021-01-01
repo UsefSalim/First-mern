@@ -1,0 +1,9 @@
+to access DB install mongo local 
+--mongo 
+--show databases
+-- use databaseName
+-- show collections -> avoir les table de la base de donner sellectionné 
+--- db.users.find().pretty() -> voir le contenu de la table 
+
+db.users.drop() -> supprimer la table users
+
